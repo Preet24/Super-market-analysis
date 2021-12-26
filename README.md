@@ -1,1 +1,2 @@
 # Super-market-analysis
+This contains a r markdown file  and its output uderstanding and visualisation  of customers of super market data set, availible from this [Link]{https://www.kaggle.com/aungpyaeap/supermarket-sales}. The dataset contians data from three cities in Myanmar,: Yangon, Naypyitaw and Mandalay for 85 days. It contains information of customer type, gender,mode of payment, profict, product type, time etc.
