@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
-We will clear the console and import the library. The data is available from this \href{https://www.kaggle.com/aungpyaeap/supermarket-sales}{link}. The data set contains transition details of a supermarket chains in Myanmar, from three branches in three cities Yangon, Naypyitaw and Mandalay for 85 days.\
+We will clear the console and import the library. The data is available from this \href{https://www.kaggle.com/aungpyaeap/supermarket-sales}{link}. The data set contains transition details of a supermarket chains in Myanmar, from three branches in three cities Yangon, Naypyitaw and Mandalay for 85 days. The data set contains information about the customer type, gender, mode of payment, city, branch, Product line, total, payment etc.\
 Our first analysis is how the payment techniques is impacted by cost. 
 ```{r,results='hide',warning=FALSE,message=FALSE,echo=FALSE}
 rm(list=ls())
@@ -35,7 +35,7 @@ p=data %>%
   ggplot(aes(x=Total,colour=Payment))+geom_freqpoly(binwidth = 50)+labs(x="Total bill",y="Count")
 p
 ```
-From the above two graph graph the mode of payment is fairly insensitive to cost, and we can validate our conclusion from the below graph. As a result we can conclude that mode of payment is not a suitable feature to better understand dataset.\
+From the above two graph graph the mode of payment is fairly insensitive to cost, and we can validate our conclusion from the below graph. As a result we can conclude that mode of payment is not a suitable feature to better understand data set.\
 ```{r,warning=FALSE,message=FALSE,echo=FALSE,fig.align='center'}
 p=data %>% 
   ggplot(aes(x=Payment,y=Total,colour=Payment,fill=Payment))+geom_violin()+labs(x="Total bill")
@@ -54,7 +54,7 @@ p=a %>%
   scale_x_datetime(date_labels = "%H:%M", date_breaks = "1 hour")
 p
 ```
-We now see how for the month of `r m`, except for the time between 11:30 AM 12:30 PM when number of female decline otherwise and both male and female visit the super market at the same time. Otherwise the frequency goes increase and decease every other hour.\
+We now see how for the month of `r m`, except for the time between 11:30 AM 12:30 PM when number of female decline, both male and female visit the super market at the same time. We now can clearly say that there is no difference in visting time between male and female customers, both gender visit the supermarkets at the same time except for 11:30 AM to 12:30 PM.\
 ```{r,fig.width = 20,fig.height = 6,warning=FALSE,message=FALSE,echo=FALSE}
 data=read.csv("D:/ML datasets/unzip files/Supermarket/supermarket_sales - Sheet1.csv")
 data$Date=as.Date(data$Date,format="%m/%d/%Y")
@@ -66,7 +66,7 @@ p=a %>%
   scale_x_datetime(date_labels = "%H:%M", date_breaks = "1 hour")
 p
 ```
-Similarly for members and normal customers, we see that no is no correlations between time and membership.\
+Similarly for members and normal customers, we see that no is no correlations between time and membership. We can clearly say that customer type no effect on visiting time of the customer.\
 ```{r,fig.width = 20,fig.height = 6,warning=FALSE,message=FALSE,echo=FALSE}
 data=read.csv("D:/ML datasets/unzip files/Supermarket/supermarket_sales - Sheet1.csv")
 data$Date=as.Date(data$Date,format="%m/%d/%Y")
@@ -78,7 +78,7 @@ p=a %>%
   scale_x_datetime(date_labels = "%H:%M", date_breaks = "1 hour")
 p
 ```
-As we can see from the above graph, there is no correlation between the city and timing of people visiting the super market. We will try to look at the total money spend depends on the  week of the month.As we can wee from the below graph spending increase on the first week of a new month and a decrease on the last day of the month. \
+As we can see from the above graph, there is no correlation between the city and timing of customers visiting the super market. We will try to look at the total money spend depends on the day of the month.As we can wee from the below graph spending increase on the first week of a new month and a decrease on the last week of the month. \
 ```{r,fig.width = 20,fig.height = 6,warning=FALSE,message=FALSE,echo=FALSE}
 data=read.csv("D:/ML datasets/unzip files/Supermarket/supermarket_sales - Sheet1.csv")
 z=unique(data[c("Date")])
@@ -94,17 +94,16 @@ ggplot(data=z,aes(x=Date,y=d))+geom_point()+geom_line()+labs(x="Month",y="Money 
   geom_vline(xintercept = e,linetype="dotted",color = "black", size=1.0)+
   geom_vline(xintercept = c(as.Date("2019-02-01"),as.Date("2019-03-01")),linetype="dotted",color = "pink", size=1.5)
 ```
-
 ## Catogory Analysis of dataset
 ```{r,results='hide',warning=FALSE,message=FALSE,echo=FALSE}
 data=read.csv("D:/ML datasets/unzip files/Supermarket/supermarket_sales - Sheet1.csv")
 ggplot(data=data,aes(y=Total,x=Gender,fill=Gender))+geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
 ```
-As we can see from the above and below graph, female have a higher 75% quantile and tail except for Yagon where male have a longer tail but still have less 75% quantile then the female for the city of Yagon. Otherwise there is negligible difference on spending on the bases of gender.\
+As we can see from the above and below graph, female have a higher 75% quantile and longer tail except for the city of Yagon where male have a longer tail but females still have higher 75% quantile. Otherwise there is negligible difference on spending on the bases of gender even across different cities.\
 ```{r,results='hide',warning=FALSE,message=FALSE,echo=FALSE}
 ggplot(data=data,aes(y=Total,x=City,fill=Gender))+geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
 ```
-As we can see from the below graph, we can say that visually customer type have no effect on the money the customer. We can clearly say that both gender and customer type not usefull to under custer behaviour and segmentation\
+As we can see from the below graph, we can say that visually customer type have no effect on the money the customer. We can clearly say that both gender and customer type not useful to under customer behavior and segmentation\
 ```{r,results='hide',warning=FALSE,message=FALSE,echo=FALSE}
 data=read.csv("D:/ML datasets/unzip files/Supermarket/supermarket_sales - Sheet1.csv")
 ggplot(data=data,aes(y=Total,x=Customer.type,fill=Customer.type))+geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
